@@ -1,0 +1,90 @@
+<views:DialogBase x:Class="KostinShop.Views.UserEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:KostinShop.Views"
+        Title="Редактирование пользователя — KostinShop"
+        Height="520" Width="480"
+        MinHeight="480" MinWidth="400"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Resources/logo.png"
+        Style="{StaticResource BaseWindowStyle}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource DialogHeaderBorderStyle}">
+            <TextBlock x:Name="TitleTextBlock" Text="Редактирование пользователя"
+                       Style="{StaticResource DialogHeaderTitleStyle}"/>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="28,20,28,24">
+
+                <TextBlock Text="Пользователь" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,4"/>
+                <Border Background="#F5F5F5" CornerRadius="4" Padding="10,8" Margin="0,0,0,14">
+                    <TextBlock x:Name="FullNameTextBlock" FontSize="13" Foreground="#444"/>
+                </Border>
+
+                <TextBlock Text="Логин *" Style="{StaticResource FormLabelStyle}"/>
+                <TextBox x:Name="LoginTextBox"
+                         Style="{StaticResource InputStyle}"
+                         MaxLength="50" TabIndex="1" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Новый пароль (оставьте пустым, чтобы не менять)"
+                           Style="{StaticResource FormLabelStyle}"/>
+                <PasswordBox x:Name="NewPasswordBox"
+                             Style="{StaticResource PasswordInputStyle}"
+                             Margin="0,0,0,4" TabIndex="2"/>
+                <TextBlock Text="Мин. 6 символов, 1 заглавная, 1 цифра, 1 спецсимвол (!@#$%^)"
+                           FontSize="11" Foreground="#7F8C8D" Margin="0,0,0,14"/>
+
+                <TextBlock Text="Роли" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8"/>
+
+                <Border Background="#F9F9F9" CornerRadius="4" Padding="12,10" Margin="0,0,0,14">
+                    <StackPanel>
+                        <CheckBox x:Name="RoleClientCheck"
+                                  Content="Клиент (личный кабинет, корзина, заказы)"
+                                  FontSize="13" Margin="0,0,0,6" TabIndex="3"/>
+                        <TextBlock x:Name="ClientWarningText"
+                                   Text="⚠ Снятие флага 'Клиент' не удаляет существующий профиль клиента и его заказы."
+                                   FontSize="11" Foreground="#E67E22" TextWrapping="Wrap"
+                                   Visibility="Collapsed" Margin="0,0,0,6"/>
+                        <CheckBox x:Name="RoleAdminCheck"
+                                  Content="Администратор (управление пользователями, полный доступ)"
+                                  FontSize="13" Margin="0,0,0,6" TabIndex="4"/>
+                        <CheckBox x:Name="RoleManagerCheck"
+                                  Content="Менеджер (товары, категории, клиенты, заказы)"
+                                  FontSize="13" Margin="0,0,0,6" TabIndex="5"/>
+                        <CheckBox x:Name="RoleLogistCheck"
+                                  Content="Логист (просмотр и смена статусов заказов)"
+                                  FontSize="13" Margin="0,0,0,0" TabIndex="6"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock x:Name="ErrorTextBlock"
+                           Foreground="#E74C3C" FontSize="12"
+                           Margin="0,0,0,10" Visibility="Collapsed"
+                           TextWrapping="Wrap"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Отмена"
+                            Style="{StaticResource SecondaryButtonStyle}"
+                            Height="36" TabIndex="8" Click="CancelButton_Click"/>
+                    <Button Grid.Column="2" Content="Сохранить"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Height="36" TabIndex="7" IsDefault="True"
+                            Click="SaveButton_Click"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</views:DialogBase>

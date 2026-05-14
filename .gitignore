@@ -1,0 +1,47 @@
+# Build and debug artifacts
+bin/
+obj/
+.vs/
+
+# User-specific files
+*.user
+*.userprefs
+*.suo
+*.sln.docstates
+
+# IDE-specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build output
+*.exe
+*.dll
+*.pdb
+*.nupkg
+
+# Database and configuration
+appsettings.json
+*.db
+*.mdf
+*.ldf
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Node (if any frontend tooling added later)
+node_modules/
+package-lock.json
+yarn.lock
+
+# NuGet
+.nuget/

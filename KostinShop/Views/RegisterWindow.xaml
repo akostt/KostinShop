@@ -1,0 +1,97 @@
+<Window x:Class="KostinShop.Views.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="KostinShop — Регистрация"
+        Height="660" Width="480"
+        MinHeight="560" MinWidth="400"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/logo.png"
+        Style="{StaticResource BaseWindowStyle}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Шапка -->
+        <Border Grid.Row="0" Background="{StaticResource PrimaryBrush}">
+            <DockPanel Margin="16,0">
+                <Button DockPanel.Dock="Left" Content="← Назад"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Padding="10,6" VerticalAlignment="Center"
+                        IsCancel="True" Click="BackButton_Click"/>
+                <TextBlock Text="Регистрация нового клиента"
+                           FontSize="15" FontWeight="Bold"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+            </DockPanel>
+        </Border>
+
+        <!-- Форма -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="32,20,32,24">
+
+                <!-- Личные данные -->
+                <TextBlock Text="Личные данные" Style="{StaticResource SectionTitleStyle}"
+                           Margin="0,0,0,10"/>
+
+                <TextBlock Text="Имя *" Style="{StaticResource FormLabelStyle}"/>
+                <TextBox x:Name="FirstNameTextBox" Style="{StaticResource InputStyle}"
+                         Tag="Например: Иван" MaxLength="50" TabIndex="1" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Отчество" Style="{StaticResource FormLabelStyle}"/>
+                <TextBox x:Name="MiddleNameTextBox" Style="{StaticResource InputStyle}"
+                         Tag="Необязательно" MaxLength="50" TabIndex="2" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Фамилия *" Style="{StaticResource FormLabelStyle}"/>
+                <TextBox x:Name="LastNameTextBox" Style="{StaticResource InputStyle}"
+                         Tag="Например: Иванов" MaxLength="50" TabIndex="3" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Телефон *" Style="{StaticResource FormLabelStyle}"/>
+                <TextBox x:Name="PhoneTextBox" Style="{StaticResource InputStyle}"
+                         Tag="+7 (XXX) XXX-XX-XX" MaxLength="20" TabIndex="4" Margin="0,0,0,14"/>
+
+                <!-- Данные для входа -->
+                <TextBlock Text="Данные для входа" Style="{StaticResource SectionTitleStyle}"
+                           Margin="0,0,0,10"/>
+
+                <TextBlock Text="Логин *" Style="{StaticResource FormLabelStyle}"/>
+                <TextBox x:Name="LoginTextBox" Style="{StaticResource InputStyle}"
+                         Tag="Латинские буквы и цифры, мин. 3 символа"
+                         MaxLength="50" TabIndex="5" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Пароль *" Style="{StaticResource FormLabelStyle}"/>
+                <PasswordBox x:Name="PasswordBox" Style="{StaticResource PasswordInputStyle}"
+                             Margin="0,0,0,4" TabIndex="6" KeyDown="PasswordBox_KeyDown"/>
+                <TextBlock Text="Мин. 6 символов, 1 заглавная, 1 цифра, 1 спецсимвол (!@#$%^)"
+                           FontSize="11" Foreground="#7F8C8D" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Подтверждение пароля *" Style="{StaticResource FormLabelStyle}"/>
+                <PasswordBox x:Name="ConfirmPasswordBox" Style="{StaticResource PasswordInputStyle}"
+                             Margin="0,0,0,16" TabIndex="7" KeyDown="PasswordBox_KeyDown"/>
+
+                <!-- Информация -->
+                <Border Background="#EBF5FB" CornerRadius="4" Padding="12,8" Margin="0,0,0,16">
+                    <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="#2E86C1">
+                        <Run FontWeight="SemiBold">ℹ После регистрации</Run>
+                        <Run> вы получите доступ к личному кабинету, каталогу товаров, корзине и истории заказов.</Run>
+                    </TextBlock>
+                </Border>
+
+                <!-- Ошибка -->
+                <TextBlock x:Name="ErrorTextBlock"
+                           Foreground="#E74C3C" FontSize="12"
+                           Margin="0,0,0,10" Visibility="Collapsed"
+                           TextWrapping="Wrap"/>
+
+                <Button Content="Создать аккаунт"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Height="40" TabIndex="8"
+                        IsDefault="True" Click="RegisterButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

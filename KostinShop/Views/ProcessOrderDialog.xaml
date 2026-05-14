@@ -1,0 +1,108 @@
+<local:DialogBase x:Class="KostinShop.Views.ProcessOrderDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:KostinShop.Views"
+        Title="Оформление заказа"
+        Height="520" Width="640"
+        MinHeight="420" MinWidth="560"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        Icon="/Resources/logo.png"
+        Style="{StaticResource BaseWindowStyle}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource DialogHeaderBorderStyle}">
+            <TextBlock x:Name="TitleTextBlock" Text="Оформление заказа"
+                       Style="{StaticResource DialogHeaderTitleStyle}"/>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled" Padding="0,0,2,0">
+            <StackPanel Margin="24,16,24,8">
+                <TextBlock Text="Данные заказа" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Клиент" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ClientTextBlock" FontSize="13"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Адрес" Style="{StaticResource FormLabelStyle}" Margin="0,6,0,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="AddressTextBlock" TextWrapping="Wrap" Margin="0,6,0,0"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата" Style="{StaticResource FormLabelStyle}" Margin="0,6,0,0"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="DateTextBlock" Margin="0,6,0,0"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Статус" Style="{StaticResource FormLabelStyle}" Margin="0,6,0,0"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" x:Name="StatusTextBlock" Margin="0,6,0,0"/>
+                </Grid>
+
+                <TextBlock Text="Состав заказа" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8"/>
+                <DataGrid x:Name="ItemsGrid"
+                          Style="{StaticResource DataGridStyle}"
+                          Height="200"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Товар"  Binding="{Binding ProductName}" Width="2*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Цена"   Binding="{Binding Price_at_order, StringFormat='{}{0:N2}'}" Width="90" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Кол-во" Binding="{Binding Quantity}" Width="70" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Сумма"  Binding="{Binding LineTotal, StringFormat='{}{0:N2}'}" Width="90" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock x:Name="ErrorTextBlock"
+                           Foreground="#E74C3C" FontSize="12"
+                           Margin="0,10,0,4" Visibility="Collapsed"
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Background="#F8F9FA" BorderBrush="#E0E0E0" BorderThickness="0,1,0,0" Padding="24,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Выйти"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Width="110" Height="34"
+                        IsCancel="True"
+                        Click="CloseButton_Click"/>
+                <Button Grid.Column="1" Content="🚫 Отменить"
+                        Style="{StaticResource DangerButtonStyle}"
+                        Width="120" Height="34"
+                        Margin="8,0,0,0"
+                        Click="CancelOrderButton_Click"/>
+                <Button Grid.Column="2" Content="✅ Оформить"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Width="120" Height="34"
+                        Margin="8,0,0,0"
+                        Click="ProcessOrderButton_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</local:DialogBase>

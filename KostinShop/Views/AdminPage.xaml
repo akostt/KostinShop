@@ -1,0 +1,69 @@
+<Page x:Class="KostinShop.Views.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Пользователи системы">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource ToolbarCardStyle}" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="{StaticResource PrimaryDarkBrush}" CornerRadius="6,0,0,6"/>
+
+                <StackPanel Grid.Column="1" Margin="16,12" VerticalAlignment="Center" MinWidth="80">
+                    <TextBlock Text="👑 Пользователи" Style="{StaticResource SectionTitleStyle}"/>
+                    <TextBlock Text="Управление аккаунтами" Style="{StaticResource PageSubtitleStyle}"/>
+                </StackPanel>
+
+                <Border Grid.Column="2" Background="#E8E8E8" Margin="0,10"/>
+
+                <Grid Grid.Column="3" Margin="16,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="34"/>
+                        <RowDefinition Height="8"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox x:Name="SearchTextBox" Grid.Row="0"
+                             Style="{StaticResource InputStyle}"
+                             Height="34"
+                             VerticalContentAlignment="Center"
+                             Padding="8,0"
+                             Tag="🔍 Поиск по логину, имени, телефону..."
+                             TextChanged="SearchTextBox_TextChanged"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="✏️ Изменить" Style="{StaticResource SecondaryButtonStyle}"
+                                Margin="0,0,6,0" Click="EditButton_Click"/>
+                        <Button Content="🗑 Удалить"  Style="{StaticResource DangerButtonStyle}"
+                                Margin="0,0,6,0" Click="DeleteButton_Click"/>
+                        <Button Content="↺ Обновить" Style="{StaticResource SecondaryButtonStyle}"
+                                Click="RefreshButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <DataGrid x:Name="UsersDataGrid" Grid.Row="1"
+                  Style="{StaticResource DataGridStyle}"
+                  MouseDoubleClick="UsersDataGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Логин"    Binding="{Binding Login}"    Width="130"/>
+                <DataGridTextColumn Header="ФИО"      Binding="{Binding FullName}" Width="2*"/>
+                <DataGridTextColumn Header="Телефон"  Binding="{Binding Phone}"    Width="150"/>
+                <DataGridTextColumn Header="Роли"     Binding="{Binding Roles}"    Width="*"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

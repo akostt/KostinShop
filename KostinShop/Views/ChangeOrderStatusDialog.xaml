@@ -1,0 +1,63 @@
+<local:DialogBase x:Class="KostinShop.Views.ChangeOrderStatusDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:KostinShop.Views"
+        Title="Изменение статуса заказа"
+        Height="260" Width="460"
+        MinHeight="260" MinWidth="420"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        Icon="/Resources/logo.png"
+        Style="{StaticResource BaseWindowStyle}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource DialogHeaderBorderStyle}">
+            <Grid Margin="16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/logo.png" Width="24" Height="24"
+                       VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"
+                       Visibility="Collapsed"/>
+                <TextBlock x:Name="TitleTextBlock" Grid.Column="1" Text="Изменение статуса заказа"
+                           Style="{StaticResource DialogHeaderTitleStyle}"/>
+            </Grid>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="24,20,24,0">
+            <StackPanel>
+                <TextBlock x:Name="OrderInfoTextBlock"
+                           FontSize="12" Foreground="#5D6D7E"
+                           Margin="0,0,0,12" TextWrapping="Wrap"/>
+                <TextBlock Text="Новый статус *" Style="{StaticResource FormLabelStyle}"/>
+                <ComboBox x:Name="StatusCombo"
+                          Style="{StaticResource ComboInputStyle}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="ID_Order_Status"
+                          MaxDropDownHeight="200"
+                          TabIndex="0"/>
+                <TextBlock x:Name="ErrorTextBlock"
+                           Foreground="#E74C3C" FontSize="12"
+                           Margin="0,6,0,0" Visibility="Collapsed"
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                HorizontalAlignment="Right" Margin="24,12,24,16">
+            <Button Margin="0,0,8,0" Content="Отмена"
+                Style="{StaticResource SecondaryButtonStyle}"
+                Width="90" IsCancel="True" Click="CancelButton_Click"/>
+            <Button Content="Сохранить"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Width="100" IsDefault="True" Click="SaveButton_Click" TabIndex="1"/>
+        </StackPanel>
+    </Grid>
+</local:DialogBase>
