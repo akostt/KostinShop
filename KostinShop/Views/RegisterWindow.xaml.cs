@@ -23,7 +23,6 @@ public partial class RegisterWindow : Window
     {
         HideError();
 
-        // Публичная регистрация — всегда клиент, без ролей сотрудника
         var error = AuthService.Register(
             login:           LoginTextBox.Text,
             password:        PasswordBox.Password,

@@ -4,18 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KostinShop.Migrations
 {
-    /// <summary>
-    /// Приводит базу в финальное состояние:
-    /// 1. Переименовывает FK_AppUser_Client → FK_AppUser_Client_ID_Client
-    /// 2. Пересоздаёт IX_AppUser_ID_Client как фильтрованный (WHERE ID_Client IS NOT NULL)
-    /// 3. Добавляет базовые роли (role_admin, role_manager, role_logist)
-    /// Все операции идемпотентны (IF EXISTS / IF NOT EXISTS).
-    /// </summary>
     public partial class FinalFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // ── 1. Переименование FK ─────────────────────────────────────
             migrationBuilder.Sql(@"
                 IF EXISTS (
                     SELECT 1 FROM sys.foreign_keys
@@ -40,7 +32,6 @@ namespace KostinShop.Migrations
                 END
             ");
 
-            // ── 2. Пересоздание индекса как фильтрованного ───────────────
             migrationBuilder.Sql(@"
                 IF EXISTS (
                     SELECT 1 FROM sys.indexes
@@ -64,7 +55,6 @@ namespace KostinShop.Migrations
                 END
             ");
 
-            // ── 3. Базовые роли ──────────────────────────────────────────
             migrationBuilder.Sql(@"
                 IF NOT EXISTS (SELECT 1 FROM [Role] WHERE [Name] = 'role_manager')
                     INSERT INTO [Role] ([Name], [Description])
@@ -79,7 +69,6 @@ namespace KostinShop.Migrations
                     VALUES ('role_admin', 'Администратор — полный доступ, управление пользователями системы')
             ");
 
-            // ── 4. Базовые статусы заказов ───────────────────────────────
             migrationBuilder.Sql(@"
                 IF NOT EXISTS (SELECT 1 FROM [Order_Status] WHERE [Name] = 'Новый')
                     INSERT INTO [Order_Status] ([Name]) VALUES ('Новый')

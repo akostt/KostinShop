@@ -21,11 +21,6 @@ public class ShopDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // The last two migrations (Update, AddAdminRole) execute raw SQL only and
-        // do not alter the schema. Their .Designer.cs snapshot bodies were lost,
-        // so EF cannot verify they match the current model — but they do.
-        // This suppression is the approach documented by EF Core for this scenario.
-        // See: RelationalEventId.PendingModelChangesWarning
         optionsBuilder.ConfigureWarnings(w =>
             w.Ignore(RelationalEventId.PendingModelChangesWarning));
     }
@@ -45,32 +40,25 @@ public class ShopDbContext : DbContext
         modelBuilder.Entity<Role>().ToTable("Role");
         modelBuilder.Entity<UserRole>().ToTable("UserRole");
 
-        // Уникальный логин
         modelBuilder.Entity<AppUser>()
             .HasIndex(u => u.Login).IsUnique();
 
-        // Уникальный телефон
         modelBuilder.Entity<AppUser>()
             .HasIndex(u => u.Phone).IsUnique();
 
-        // 1:1 пользователь ↔ клиентский профиль
         modelBuilder.Entity<AppUser>()
             .HasIndex(u => u.ID_Client).IsUnique()
             .HasFilter("[ID_Client] IS NOT NULL");  // NULL = нет клиентского профиля (сотрудник)
 
-        // Уникальная пара (пользователь, роль) — нельзя назначить одну роль дважды
         modelBuilder.Entity<UserRole>()
             .HasIndex(ur => new { ur.ID_User, ur.ID_Role }).IsUnique();
 
-        // Уникальная строка корзины
         modelBuilder.Entity<Cart>()
             .HasIndex(c => new { c.ID_Client, c.ID_Product }).IsUnique();
 
-        // Уникальная позиция в заказе
         modelBuilder.Entity<ProductOrder>()
             .HasIndex(po => new { po.ID_Order, po.ID_Product }).IsUnique();
 
-        // CHECK-ограничения
         modelBuilder.Entity<Product>()
             .ToTable(t => t.HasCheckConstraint("CK_Product_Price", "[Price] >= 0"));
         modelBuilder.Entity<ProductOrder>()

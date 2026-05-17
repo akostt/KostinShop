@@ -5,13 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KostinShop.Migrations
 {
-    /// <inheritdoc />
     public partial class InitialSchema : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // ── 1. Category ──────────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
@@ -25,7 +22,6 @@ namespace KostinShop.Migrations
                     table.PrimaryKey("PK_Category", x => x.ID_Category);
                 });
 
-            // ── 2. Order_Status ──────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "Order_Status",
                 columns: table => new
@@ -39,7 +35,6 @@ namespace KostinShop.Migrations
                     table.PrimaryKey("PK_Order_Status", x => x.ID_Order_Status);
                 });
 
-            // ── 3. Role ──────────────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "Role",
                 columns: table => new
@@ -54,7 +49,6 @@ namespace KostinShop.Migrations
                     table.PrimaryKey("PK_Role", x => x.ID_Role);
                 });
 
-            // ── 4. Client ────────────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "Client",
                 columns: table => new
@@ -70,7 +64,6 @@ namespace KostinShop.Migrations
                     table.CheckConstraint("CK_Client_LoyaltyPts", "[Loyalty_Points] >= 0");
                 });
 
-            // ── 5. Product ───────────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "Product",
                 columns: table => new
@@ -90,7 +83,6 @@ namespace KostinShop.Migrations
                         "Category", "ID_Category", onDelete: ReferentialAction.Cascade);
                 });
 
-            // ── 6. AppUser ───────────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "AppUser",
                 columns: table => new
@@ -112,7 +104,6 @@ namespace KostinShop.Migrations
                         "Client", "ID_Client", onDelete: ReferentialAction.SetNull);
                 });
 
-            // ── 7. UserRole ──────────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "UserRole",
                 columns: table => new
@@ -131,7 +122,6 @@ namespace KostinShop.Migrations
                         "Role", "ID_Role", onDelete: ReferentialAction.Cascade);
                 });
 
-            // ── 8. Order ─────────────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
@@ -152,7 +142,6 @@ namespace KostinShop.Migrations
                         "Order_Status", "ID_Order_Status", onDelete: ReferentialAction.Cascade);
                 });
 
-            // ── 9. Cart ──────────────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "Cart",
                 columns: table => new
@@ -173,7 +162,6 @@ namespace KostinShop.Migrations
                         "Product", "ID_Product", onDelete: ReferentialAction.Cascade);
                 });
 
-            // ── 10. Product_Order ─────────────────────────────────────────
             migrationBuilder.CreateTable(
                 name: "Product_Order",
                 columns: table => new
@@ -195,7 +183,6 @@ namespace KostinShop.Migrations
                         "Product", "ID_Product", onDelete: ReferentialAction.Cascade);
                 });
 
-            // ── Индексы ───────────────────────────────────────────────────
             migrationBuilder.CreateIndex("IX_AppUser_Login",    "AppUser", "Login",    unique: true);
             migrationBuilder.CreateIndex("IX_AppUser_Phone",    "AppUser", "Phone",    unique: true);
             migrationBuilder.CreateIndex("IX_AppUser_ID_Client","AppUser", "ID_Client",unique: true);
@@ -214,7 +201,6 @@ namespace KostinShop.Migrations
             migrationBuilder.CreateIndex("IX_UserRole_Role",    "UserRole",    "ID_Role");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable("Product_Order");

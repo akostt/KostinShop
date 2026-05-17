@@ -3,9 +3,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace KostinShop.Data;
 
-/// <summary>
-/// Фабрика контекстов БД. Управляет строкой подключения и созданием DbContext.
-/// </summary>
 public static class DbContextFactory
 {
     private static string _connectionString = string.Empty;

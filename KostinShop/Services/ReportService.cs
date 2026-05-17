@@ -77,10 +77,6 @@ public static class ReportService
         workbook.Write(fs);
     }
 
-    /// <summary>
-    /// Читает имя клиента напрямую из навигационного свойства User.
-    /// Client.FullName не используется — его [NotMapped]-поля не заполняются EF.
-    /// </summary>
     private static string ClientName(Models.Client client)
     {
         var u = client.User;

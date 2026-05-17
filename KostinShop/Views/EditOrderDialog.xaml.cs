@@ -17,17 +17,13 @@ public partial class EditOrderDialog : DialogBase
         _orderId = order.ID_Order;
         TitleTextBlock.Text = $"Редактирование заказа №{order.ID_Order}";
 
-        // Статусы
         StatusCombo.ItemsSource   = StatusService.GetAllSimple();
         StatusCombo.SelectedValue = order.ID_Order_Status;
 
-        // Адрес
         AddressTextBox.Text       = order.Delivery_Address;
 
-        // Товары для добавления
         AddProductCombo.ItemsSource = ProductService.GetAll();
 
-        // Состав
         RefreshItems();
     }
 

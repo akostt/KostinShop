@@ -6,12 +6,6 @@ using System.Windows.Input;
 
 namespace KostinShop.Views;
 
-/// <summary>
-/// Базовый класс для страниц с таблицей и CRUD-операциями.
-/// XAML не поддерживает generic-базовые классы напрямую, поэтому
-/// каждая страница наследует нетипизированный промежуточный класс
-/// (CategoriesPageBase и т.д.), а он уже наследует CrudPage&lt;T&gt;.
-/// </summary>
 public abstract class CrudPage<T> : Page where T : class
 {
     protected abstract DataGrid Grid       { get; }
@@ -74,9 +68,6 @@ public abstract class CrudPage<T> : Page where T : class
     }
 }
 
-/// <summary>
-/// Базовые классы без generic-типов, чтобы XAML мог их использовать как базовый тип.
-/// </summary>
 public abstract class CategoriesPageBase : CrudPage<Models.Category> { }
 public abstract class ProductsPageBase   : CrudPage<Models.Product>  { }
 public abstract class ClientsPageBase    : CrudPage<Models.Client>   { }

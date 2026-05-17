@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Шапка -->
+        
         <Border Grid.Row="0" Background="{StaticResource PrimaryBrush}">
             <DockPanel Margin="16,0">
                 <Button DockPanel.Dock="Left" Content="← Назад"
@@ -29,12 +29,12 @@
             </DockPanel>
         </Border>
 
-        <!-- Форма -->
+        
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled">
             <StackPanel Margin="32,20,32,24">
 
-                <!-- Личные данные -->
+                
                 <TextBlock Text="Личные данные" Style="{StaticResource SectionTitleStyle}"
                            Margin="0,0,0,10"/>
 
@@ -54,7 +54,7 @@
                 <TextBox x:Name="PhoneTextBox" Style="{StaticResource InputStyle}"
                          Tag="+7 (XXX) XXX-XX-XX" MaxLength="20" TabIndex="4" Margin="0,0,0,14"/>
 
-                <!-- Данные для входа -->
+                
                 <TextBlock Text="Данные для входа" Style="{StaticResource SectionTitleStyle}"
                            Margin="0,0,0,10"/>
 
@@ -73,7 +73,7 @@
                 <PasswordBox x:Name="ConfirmPasswordBox" Style="{StaticResource PasswordInputStyle}"
                              Margin="0,0,0,16" TabIndex="7" KeyDown="PasswordBox_KeyDown"/>
 
-                <!-- Информация -->
+                
                 <Border Background="#EBF5FB" CornerRadius="4" Padding="12,8" Margin="0,0,0,16">
                     <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="#2E86C1">
                         <Run FontWeight="SemiBold">ℹ После регистрации</Run>
@@ -81,7 +81,7 @@
                     </TextBlock>
                 </Border>
 
-                <!-- Ошибка -->
+                
                 <TextBlock x:Name="ErrorTextBlock"
                            Foreground="#E74C3C" FontSize="12"
                            Margin="0,0,0,10" Visibility="Collapsed"

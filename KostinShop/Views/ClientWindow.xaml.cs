@@ -310,7 +310,6 @@ public partial class ClientWindow : Window
         }
     }
 
-    // Оставляем для совместимости (поля больше нет в XAML, но могут быть ссылки)
     private void SearchTextBox_TextChanged(object s, TextChangedEventArgs e) { }
     private void ProductSearchBox_TextChanged(object s, TextChangedEventArgs e) { }
     private void CategoryFilter_Changed(object s, SelectionChangedEventArgs e) { }

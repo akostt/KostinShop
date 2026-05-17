@@ -3,10 +3,6 @@ using System.Windows.Controls;
 
 namespace KostinShop.Views;
 
-/// <summary>
-/// Базовый класс для диалоговых окон с полем ошибки.
-/// Устраняет дублирование ShowError/HideError во всех диалогах.
-/// </summary>
 public abstract class DialogBase : Window
 {
     protected abstract TextBlock ErrorBlock { get; }
