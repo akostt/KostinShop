@@ -50,7 +50,7 @@ public static class ReportService
         StyledCell(addressRow, 1, dataStyle).SetCellValue(order.Delivery_Address);
         sheet.AddMergedRegion(new CellRangeAddress(4, 4, 1, 4));
 
-        string[] headers = ["Товар", "Цена", "Кол-во", "Сумма", "ID товара"]; 
+        string[] headers = ["Товар", "Цена", "Кол-во", "Сумма"]; 
         var headerRow = sheet.CreateRow(6);
         for (int i = 0; i < headers.Length; i++)
             StyledCell(headerRow, i, headerStyle).SetCellValue(headers[i]);
@@ -67,7 +67,6 @@ public static class ReportService
             StyledCell(r, 1, dataStyle).SetCellValue((double)item.Price_at_order);
             StyledCell(r, 2, dataStyle).SetCellValue(item.Quantity);
             StyledCell(r, 3, dataStyle).SetCellValue((double)lineTotal);
-            StyledCell(r, 4, dataStyle).SetCellValue(item.ID_Product);
         }
 
         var totalRow = sheet.CreateRow(row);

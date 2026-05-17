@@ -37,8 +37,6 @@ public partial class MainWindow : Window
         NavigateTo(startTag);
     }
 
-    // ── Сворачивание / раскрытие боковой панели ──────────────────────────
-
     private void ToggleSidebar_Click(object sender, RoutedEventArgs e)
     {
         _sidebarExpanded = !_sidebarExpanded;
@@ -47,7 +45,6 @@ public partial class MainWindow : Window
         SetLabelsVisibility(_sidebarExpanded ? Visibility.Visible : Visibility.Collapsed);
     }
 
-    /// <summary>Скрывает/показывает текстовые подписи пунктов меню.</summary>
     private void SetLabelsVisibility(Visibility v)
     {
         LblCategories.Visibility = v;
@@ -58,8 +55,6 @@ public partial class MainWindow : Window
         LblUsers.Visibility      = v;
         LblMyOrders.Visibility   = v;
     }
-
-    // ── Навигация ─────────────────────────────────────────────────────────
 
     private Button? _activeNavButton;
 
@@ -101,8 +96,6 @@ public partial class MainWindow : Window
     private void NavigateTo(string tag)
         => ContentFrame.Navigate(NavigationService.CreatePage(tag));
 
-    // ── Выход ─────────────────────────────────────────────────────────────
-
     private void LogoutButton_Click(object sender, RoutedEventArgs e)
     {
         if (!UiHelper.Confirm("Вы уверены, что хотите выйти из системы?", "Подтверждение выхода")) return;
@@ -110,8 +103,6 @@ public partial class MainWindow : Window
         new LoginWindow().Show();
         Close();
     }
-
-    // ── Вспомогательные ──────────────────────────────────────────────────
 
     private static string BuildRoleLabel(Models.AppUser user)
     {
@@ -124,7 +115,6 @@ public partial class MainWindow : Window
 
     private void ApplyRoleRestrictions()
     {
-        // Скрываем разделы только чистому логисту — менеджер видит всё
         if (!AuthService.IsLogist || AuthService.IsManager) return;
         NavCategories.Visibility = Visibility.Collapsed;
         NavProducts.Visibility   = Visibility.Collapsed;
